@@ -3,57 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHI-IRI Grade 7 | Screening Tool</title>
+    <title>PHI-IRI Grade 7 | Manuel G. Araullo High School</title>
     <style>
         :root {
-            --google-blue: #1a73e8; --google-light-blue: #e8f0fe;
-            --google-red: #d93025; --google-green: #1e8e3e;
-            --google-gray: #5f6368; --background: #f8f9fa;
+            --ahs-maroon: #800000;
+            --ahs-gold: #FFD700;
+            --ahs-light-maroon: #fdf2f2;
+            --google-gray: #5f6368;
+            --background: #f8f9fa;
         }
         body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--background); margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .container { background: white; max-width: 800px; width: 100%; padding: 40px; border-radius: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; }
+        .container { background: white; max-width: 900px; width: 100%; padding: 40px; border-radius: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; }
         
-        .settings-btn { position: absolute; top: 20px; right: 20px; background: #eee; border: 1px solid #ccc; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 24px; z-index: 10; display: flex; align-items: center; justify-content: center; }
-        .classroom-header { background: #1e8e3e; color: white; padding: 10px; text-align: center; border-radius: 24px 24px 0 0; margin: -40px -40px 20px -40px; }
-        h1, h2, h3 { color: var(--google-blue); text-align: center; margin-top: 10px; }
+        .school-header { text-align: center; margin-bottom: 30px; border-bottom: 3px double var(--ahs-maroon); padding-bottom: 15px; }
+        .school-logo { width: 100px; height: 100px; margin-bottom: 10px; }
+        .school-name { font-size: 1.6rem; font-weight: bold; color: var(--ahs-maroon); margin: 0; text-transform: uppercase; }
+        .school-loc { font-size: 1rem; color: #333; margin: 5px 0; font-weight: 500; }
+        .assessment-title { font-size: 1.2rem; font-weight: bold; color: var(--ahs-maroon); margin-top: 10px; text-transform: uppercase; background: var(--ahs-gold); display: inline-block; padding: 5px 20px; border-radius: 5px; }
+
+        .settings-btn { position: absolute; top: 20px; right: 20px; background: #eee; border: 1px solid #ccc; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 20px; z-index: 10; display: flex; align-items: center; justify-content: center; }
+        h1, h2 { color: var(--ahs-maroon); text-align: center; margin-top: 10px; }
+        h3 { color: var(--google-gray); border-bottom: 2px solid var(--ahs-light-maroon); padding-bottom: 5px; margin-top: 25px; font-size: 1.1rem; text-align: left; }
         
-        #timer-display { font-size: 4rem; text-align: center; color: var(--google-red); font-family: monospace; margin: 15px 0; font-weight: bold; }
+        #timer-display { font-size: 3.5rem; text-align: center; color: var(--ahs-maroon); font-family: monospace; margin: 15px 0; font-weight: bold; }
         .controls { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
         .btn { padding: 12px 30px; border-radius: 50px; cursor: pointer; border: 1px solid #dadce0; font-weight: 600; transition: 0.2s; }
-        .btn-primary { background: var(--google-blue); color: white; border: none; }
-        .btn-danger { background: white; color: var(--google-red); }
-        .btn-success { background: var(--google-green); color: white; border: none; width: 100%; margin-top: 20px; }
-        .btn:disabled { background: #f1f3f4; color: #9aa0a6; cursor: not-allowed; }
+        .btn-primary { background: var(--ahs-maroon); color: white; border: none; }
+        .btn-success { background: #1e8e3e; color: white; border: none; width: 100%; margin-top: 20px; }
 
-        #passage-area { border: 1px solid #dadce0; padding: 30px; border-radius: 16px; line-height: 2.2; font-size: 1.2rem; background: var(--google-light-blue); margin-bottom: 20px; }
+        #passage-area { border: 1px solid #dadce0; padding: 30px; border-radius: 16px; line-height: 2.2; font-size: 1.2rem; background: var(--ahs-light-maroon); margin-bottom: 20px; }
         .word { display: inline-block; padding: 0 3px; cursor: pointer; border-radius: 4px; }
-        .word.error { background: var(--google-red); color: white; text-decoration: line-through; }
+        .word.error { background: var(--ahs-maroon); color: white; text-decoration: line-through; }
+
+        .profile-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 10px; text-align: left; }
+        .full-width { grid-column: span 4; }
+        .half-width { grid-column: span 2; }
+        .field label { display: block; font-size: 11px; color: var(--google-gray); margin-bottom: 4px; font-weight: bold; }
+        .field input, .field select { width: 100%; padding: 10px; border: 1px solid #dadce0; border-radius: 8px; box-sizing: border-box; font-size: 13px; }
 
         .question-block { background: #fdfdfd; padding: 25px; border-radius: 12px; border: 1px solid #eee; margin-bottom: 20px; }
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
-        .option-btn { padding: 12px; border: 1px solid #dadce0; border-radius: 10px; background: white; cursor: pointer; text-align: left; font-size: 1rem; }
-        .option-btn.selected { background: var(--google-blue); color: white; border-color: var(--google-blue); }
-
-        .info-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 15px; margin-bottom: 20px; }
-        .field label { display: block; font-size: 12px; color: var(--google-gray); margin-bottom: 5px; font-weight: bold; }
-        .field input { width: 100%; padding: 12px; border: 1px solid #dadce0; border-radius: 10px; box-sizing: border-box; }
+        .option-btn { padding: 12px; border: 1px solid #dadce0; border-radius: 10px; background: white; cursor: pointer; text-align: left; }
+        .option-btn.selected { background: var(--ahs-maroon); color: white; border-color: var(--ahs-maroon); }
 
         #results-summary { display: none; padding: 35px; border-radius: 20px; text-align: center; margin-top: 25px; }
         .Independent { background: #e6f4ea; color: #137333; border: 3px solid #1e8e3e; }
         .Instructional { background: #fef7e0; color: #b06000; border: 3px solid #f9ab00; }
-        .Frustration { background: #fce8e6; color: #c5221f; border: 3px solid #d93025; }
+        .Frustration { background: #fce8e6; color: #c5221f; border: 3px solid var(--ahs-maroon); }
 
-        /* Modal Settings */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; backdrop-filter: blur(4px); overflow-y: auto;}
-        .modal-content { background: white; width: 90%; max-width: 550px; margin: 30px auto; padding: 35px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left; margin-top: 15px; }
-        .settings-grid label { font-size: 11px; font-weight: bold; color: var(--google-gray); }
-        textarea { width: 100%; height: 80px; padding: 10px; border-radius: 10px; border: 1px solid #dadce0; margin-bottom: 10px; box-sizing: border-box; font-family: monospace; font-size: 11px; }
-        
-        /* Table Style for Settings */
-        .reference-table { width: 100%; font-size: 11px; border-collapse: collapse; margin-top: 10px; background: #fff; }
-        .reference-table th, .reference-table td { border: 1px solid #ddd; padding: 6px; text-align: center; }
-        .reference-table th { background: #f1f3f4; }
+        .modal-content { background: white; width: 90%; max-width: 500px; margin: 30px auto; padding: 35px; border-radius: 24px; }
     </style>
 </head>
 <body>
@@ -61,15 +60,37 @@
 <div class="container">
     <button class="settings-btn" onclick="openSettings()">⚙️</button>
 
+    <div class="school-header">
+        <img src="AHS_LOGO.jpg" alt="AHS Logo" class="school-logo">
+        <p class="school-name">Manuel G. Araullo High School</p>
+        <p class="school-loc">Manila, Philippines</p>
+        <p class="assessment-title">PHI-IRI Reading Assessment – Grade 7</p>
+    </div>
+
     <div id="setup-step">
-        <div class="classroom-header">PHI-IRI Grade 7 Reading Assessment</div>
-        <h1>Student Profile</h1>
-        <div class="info-grid">
-            <div class="field"><label>Full Name</label><input type="text" id="studentName" placeholder="Juan Dela Cruz"></div>
-            <div class="field"><label>Grade</label><input type="text" id="gradeLevel" value="7"></div>
-            <div class="field"><label>Section</label><input type="text" id="sectionName" placeholder="Section Name"></div>
+        <h3>Personal Detail</h3>
+        <div class="profile-grid">
+            <div class="half-width field"><label>LRN NO.</label><input type="text" id="lrn"></div>
+            <div class="field"><label>SURNAME</label><input type="text" id="surname"></div>
+            <div class="field"><label>FIRST NAME</label><input type="text" id="firstName"></div>
+            <div class="field"><label>M.I.</label><input type="text" id="mi" maxlength="2"></div>
+            <div class="field"><label>GENDER</label><select id="gender"><option>Male</option><option>Female</option></select></div>
+            <div class="half-width field"><label>BIRTH DATE</label><input type="date" id="birthDate" onchange="calculateAge()"></div>
+            <div class="field"><label>AGE</label><input type="number" id="age" readonly></div>
+            <div class="half-width field"><label>ADDRESS</label><input type="text" id="address"></div>
+            <div class="half-width field"><label>BRGY NO.</label><input type="text" id="brgyNo"></div>
+            <div class="half-width field"><label>NAME OF MOTHER / GUARDIAN</label><input type="text" id="mother"></div>
+            <div class="half-width field"><label>CONTACT NO.</label><input type="text" id="motherContact"></div>
+            <div class="half-width field"><label>NAME OF FATHER / GUARDIAN</label><input type="text" id="father"></div>
+            <div class="half-width field"><label>CONTACT NO.</label><input type="text" id="fatherContact"></div>
         </div>
-        <button class="btn btn-primary" style="width:100%" onclick="startPart(0)">Start Assessment</button>
+
+        <h3>Educational Detail</h3>
+        <div class="profile-grid">
+            <div class="half-width field"><label>NAME OF PREVIOUS SCHOOL</label><input type="text" id="prevSchool"></div>
+            <div class="half-width field"><label>AVERAGE GRADE</label><input type="text" id="avgGrade"></div>
+        </div>
+        <button class="btn btn-primary" style="width:100%; margin-top:20px;" onclick="startPart(0)">Start Assessment</button>
     </div>
 
     <div id="active-step" style="display:none;">
@@ -78,14 +99,12 @@
             <div id="timer-display">10:00</div>
             <div class="controls">
                 <button id="startBtn" class="btn btn-primary" onclick="beginReading()">Start Reading</button>
-                <button id="stopBtn" class="btn btn-danger" onclick="endReading()" disabled>Stop Reading</button>
+                <button id="stopBtn" class="btn btn-danger" style="background:white; color:var(--ahs-maroon);" onclick="endReading()" disabled>Stop Reading</button>
             </div>
         </div>
-        <div id="passage-container">
-            <div id="passage-area"></div>
-        </div>
+        <div id="passage-area"></div>
         <div id="quiz-container" style="display:none;">
-            <h3>Reading Comprehension</h3>
+            <h3>Comprehension Quiz</h3>
             <div id="quiz-area"></div>
             <button id="nextBtn" class="btn btn-success" onclick="goToNextStep()">Continue</button>
         </div>
@@ -93,59 +112,21 @@
 
     <div id="results-summary"></div>
     <button id="submitBtn" class="btn btn-primary" style="display:none; width:100%; margin-top:15px;" onclick="sendData()">Submit to Google Sheets</button>
-    <button id="resetBtn" class="btn" style="display:none; width:100%; margin-top:10px;" onclick="location.reload()">New Assessment</button>
 </div>
 
 <div id="settingsModal" class="modal">
     <div class="modal-content">
-        <h2>Admin Configuration</h2>
-        <label style="font-size: 11px; font-weight: bold; color: var(--google-gray);">GOOGLE APPS SCRIPT URL</label>
-        <textarea id="sheetUrl"></textarea>
-        
-        <hr>
-        <h3>Phil-IRI Parameters & Rates</h3>
-        <table class="reference-table">
-            <thead>
-                <tr>
-                    <th>Level</th>
-                    <th>Word Reading (%)</th>
-                    <th>Comprehension (%)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Independent</td><td>97-100%</td><td>80-100%</td></tr>
-                <tr><td>Instructional</td><td>90-96%</td><td>59-79%</td></tr>
-                <tr><td>Frustration</td><td>< 90%</td><td>< 59%</td></tr>
-            </tbody>
-        </table>
-
-        <div class="settings-grid">
-            <div>
-                <label>IND. WORD RDG (Min %)</label>
-                <input type="number" id="t_ind_word" value="97">
-            </div>
-            <div>
-                <label>IND. COMP (Min %)</label>
-                <input type="number" id="t_ind_comp" value="80">
-            </div>
-            <div>
-                <label>INS. WORD RDG (Min %)</label>
-                <input type="number" id="t_ins_word" value="90">
-            </div>
-            <div>
-                <label>INS. COMP (Min %)</label>
-                <input type="number" id="t_ins_comp" value="59">
-            </div>
-        </div>
-        <button class="btn btn-primary" style="width:100%; margin-top:20px;" onclick="saveConfig()">Save All Settings</button>
+        <h2>Admin Settings</h2>
+        <label style="font-size: 11px; font-weight: bold;">GS SCRIPT URL</label>
+        <textarea id="sheetUrl" style="width:100%; height:60px; margin-bottom:10px;"></textarea>
+        <button class="btn btn-primary" style="width:100%;" onclick="saveConfig()">Save Settings</button>
         <button class="btn" style="width:100%; margin-top:10px;" onclick="closeSettings()">Close</button>
     </div>
 </div>
 
 <script>
-    // Correct URL set as the default constant
     const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwU35UoOUcNoRKosDMRmstSqF4Kg7XeE-LQ-VGFN8vBaI2MvJTvc3CqyDC4kma70hQ/exec";
-
+    
     const data = [
         {
             title: "PART 1: Telling Time",
@@ -166,9 +147,9 @@
             questions: [
                 { q: "When the day was divided into 24 hours, what numbers were used?", options: ["one to six", "one to twelve", "one to thirty-six", "one to twenty-four"], correct: 1 },
                 { q: "In this selection confusion may mean:", options: ["differences", "discussions", "problems", "mistakes"], correct: 2 },
-                { q: "The Romans thought of a solution. This means they provided:", options: ["an answer to the problem", "a better interpretation", "a new set of numbers", "another clock"], correct: 0 },
+                { q: "The Romans provided a solution to this problem. This means they provided:", options: ["an answer to the problem", "a better interpretation", "a new set of numbers", "another clock"], correct: 0 },
                 { q: "Meridies means:", options: ["apex", "noon", "before", "daylight"], correct: 1 },
-                { q: "When the sun was at its apex, it was noon. Apex means:", options: ["highest point", "lowest point", "farthest point", "nearest point"], correct: 0 },
+                { q: "Early Romans used the sun. When it was at its apex, it was noon. Apex means:", options: ["highest point", "lowest point", "farthest point", "nearest point"], correct: 0 },
                 { q: "Another good title for this selection is:", options: ["Why There Are 24 Hours", "Importance of Noontime", "How the Romans Told Time", "The Meaning of A.M. and P.M."], correct: 3 }
             ]
         },
@@ -176,42 +157,30 @@
             title: "PART 3: Nosebleeds",
             text: "Having a nosebleed is a common occurrence. Children experience epistaxis when blood flows out from either or both nostrils, often for a short period of time. It may be caused by one’s behavior like frequent nose picking or blowing too hard when one has a cold. It may also be caused by certain physical factors such as an allergy or abnormal growths in the nasal cavity. Or it may be due to environmental conditions such as exposure to toxic fumes or dryness of the air. While it is often thought that holding one’s head back can treat a nosebleed, this can actually cause one to choke or vomit. The best thing to do is to lean forward, pinch the top of the nose and apply a cold compress. And if that doesn’t work, it’s best to get professional help.",
             questions: [
-                { q: "When children experience epistaxis, we observe:", options: ["nasal discharge", "blood flow from nasal passage", "mucus build up", "blood stoppage"], correct: 1 },
-                { q: "A 'common occurrence' is:", options: ["disappointing", "alarming", "no longer surprising", "overwhelming"], correct: 2 },
-                { q: "Which helps treat a nosebleed?", options: ["applying a cold compress", "pinching the nostrils", "holding head back", "warm compress"], correct: 0 },
-                { q: "Which cause is within our control?", options: ["allergies", "picking one's nose", "dryness in air", "abnormal growth"], correct: 1 },
+                { q: "When children experience epistaxis, we observe:", options: ["steady flow of nasal discharge", "blood flow from nasal passage", "build up of mucus", "blood stoppage"], correct: 1 },
+                { q: "A 'common occurrence' is:", options: ["incident that is disappointing", "episode that is alarming", "event that is no longer surprising", "occasion that is overwhelming"], correct: 2 },
+                { q: "Which helps treat a nosebleed?", options: ["applying a cold compress", "pinching the nostrils shut", "holding head back", "applying warm compress"], correct: 0 },
+                { q: "Which of these causes are within our control?", options: ["allergies", "picking one's nose", "dryness in air", "abnormal growth"], correct: 1 },
                 { q: "Which factors are directly within our control?", options: ["physical", "environmental", "behavioral", "social"], correct: 2 },
-                { q: "This selection is mainly providing:", options: ["description", "causes and effects", "explanation of treatment", "listing of myths"], correct: 2 },
+                { q: "This selection is mainly providing:", options: ["description of a nosebleed", "causes and effects", "explanation of treatment", "listing of myths"], correct: 2 },
                 { q: "Another good title for this selection is:", options: ["A Cause for Concern", "An Unavoidable Experience", "Common Childhood Experience", "Common Myths and Misconceptions"], correct: 2 }
             ]
         }
     ];
 
     let currentPart = 0, totalMiscues = 0, totalTime = 0, totalCorrect = 0, timer, startTime, answers = [];
-
-    // Ensure URL is set in localStorage on first load
     if (!localStorage.getItem('phil_iri_url')) localStorage.setItem('phil_iri_url', APP_SCRIPT_URL);
 
-    function openSettings() { 
-        document.getElementById('settingsModal').style.display = 'block'; 
-        document.getElementById('sheetUrl').value = localStorage.getItem('phil_iri_url');
-        document.getElementById('t_ind_word').value = localStorage.getItem('t_ind_word') || 97;
-        document.getElementById('t_ind_comp').value = localStorage.getItem('t_ind_comp') || 80;
-        document.getElementById('t_ins_word').value = localStorage.getItem('t_ins_word') || 90;
-        document.getElementById('t_ins_comp').value = localStorage.getItem('t_ins_comp') || 59;
-    }
-    function closeSettings() { document.getElementById('settingsModal').style.display = 'none'; }
-    function saveConfig() {
-        localStorage.setItem('phil_iri_url', document.getElementById('sheetUrl').value);
-        localStorage.setItem('t_ind_word', document.getElementById('t_ind_word').value);
-        localStorage.setItem('t_ind_comp', document.getElementById('t_ind_comp').value);
-        localStorage.setItem('t_ins_word', document.getElementById('t_ins_word').value);
-        localStorage.setItem('t_ins_comp', document.getElementById('t_ins_comp').value);
-        alert("Configuration saved successfully."); closeSettings();
+    function calculateAge() {
+        const bd = new Date(document.getElementById('birthDate').value);
+        const today = new Date();
+        let age = today.getFullYear() - bd.getFullYear();
+        if (today.getMonth() < bd.getMonth() || (today.getMonth() === bd.getMonth() && today.getDate() < bd.getDate())) age--;
+        document.getElementById('age').value = isNaN(age) ? "" : age;
     }
 
     function startPart(idx) {
-        if(!document.getElementById('studentName').value) return alert("Enter Student Name");
+        if(!document.getElementById('surname').value) return alert("Fill in Student Surname");
         currentPart = idx;
         document.getElementById('setup-step').style.display = 'none';
         document.getElementById('active-step').style.display = 'block';
@@ -225,7 +194,7 @@
         });
         document.getElementById('timer-ui').style.display = 'block';
         document.getElementById('timer-display').innerText = "10:00";
-        document.getElementById('passage-container').style.display = 'block';
+        document.getElementById('passage-area').style.display = 'block';
         document.getElementById('quiz-container').style.display = 'none';
         document.getElementById('startBtn').disabled = false; document.getElementById('stopBtn').disabled = true;
     }
@@ -243,7 +212,7 @@
     function endReading() {
         clearInterval(timer); totalTime += (Date.now() - startTime) / 1000;
         totalMiscues += document.querySelectorAll('.word.error').length;
-        document.getElementById('timer-ui').style.display = 'none'; document.getElementById('passage-container').style.display = 'none';
+        document.getElementById('timer-ui').style.display = 'none'; document.getElementById('passage-area').style.display = 'none';
         document.getElementById('quiz-container').style.display = 'block'; renderQuiz();
     }
 
@@ -271,41 +240,45 @@
         document.getElementById('active-step').style.display = 'none';
         const totalW = 382;
         const accuracy = ((totalW - totalMiscues) / totalW) * 100;
-        const wpm = (totalW / totalTime) * 60;
         const comp = (totalCorrect / 20) * 100;
-
-        const tIndW = parseInt(localStorage.getItem('t_ind_word') || 97);
-        const tIndC = parseInt(localStorage.getItem('t_ind_comp') || 80);
-        const tInsW = parseInt(localStorage.getItem('t_ins_word') || 90);
-        const tInsC = parseInt(localStorage.getItem('t_ins_comp') || 59);
-
-        let profile = "Frustration";
-        if (accuracy >= tIndW && comp >= tIndC) profile = "Independent";
-        else if (accuracy >= tInsW && comp >= tInsC) profile = "Instructional";
-
+        let profile = (accuracy >= 97 && comp >= 80) ? "Independent" : (accuracy >= 90 && comp >= 59) ? "Instructional" : "Frustration";
         const res = document.getElementById('results-summary');
         res.style.display = 'block'; res.className = profile;
-        res.innerHTML = `<h2>Profile: ${profile}</h2><p>Accuracy: ${accuracy.toFixed(1)}% | Speed: ${wpm.toFixed(0)} WPM | Comp: ${totalCorrect}/20</p>`;
-        document.getElementById('submitBtn').style.display = 'block'; document.getElementById('resetBtn').style.display = 'block';
+        res.innerHTML = `<h2>Profile: ${profile}</h2><p>Accuracy: ${accuracy.toFixed(1)}% | Comp: ${totalCorrect}/20</p>`;
+        document.getElementById('submitBtn').style.display = 'block';
     }
 
     async function sendData() {
         const url = localStorage.getItem('phil_iri_url');
-        const payload = { 
-            timestamp: new Date().toLocaleString(), 
-            name: document.getElementById('studentName').value, 
-            grade: document.getElementById('gradeLevel').value, 
-            section: document.getElementById('sectionName').value, 
-            accuracy: ((382-totalMiscues)/3.82).toFixed(1)+"%", 
-            wpm: (382/totalTime*60).toFixed(0), 
-            profile: document.getElementById('results-summary').className 
+        const payload = {
+            timestamp: new Date().toLocaleString(),
+            lrn: document.getElementById('lrn').value,
+            surname: document.getElementById('surname').value,
+            firstName: document.getElementById('firstName').value,
+            mi: document.getElementById('mi').value,
+            gender: document.getElementById('gender').value,
+            birthDate: document.getElementById('birthDate').value,
+            age: document.getElementById('age').value,
+            address: document.getElementById('address').value,
+            brgy: document.getElementById('brgyNo').value,
+            mother: document.getElementById('mother').value,
+            motherContact: document.getElementById('motherContact').value,
+            father: document.getElementById('father').value,
+            fatherContact: document.getElementById('fatherContact').value,
+            prevSchool: document.getElementById('prevSchool').value,
+            avgGrade: document.getElementById('avgGrade').value,
+            accuracy: ((382-totalMiscues)/3.82).toFixed(1)+"%",
+            profile: document.getElementById('results-summary').className
         };
-        if(!url) return alert("Set URL in Gear!");
         try { 
             await fetch(url, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }); 
-            alert("Data successfully compiled to Google Sheets."); 
-        } catch(e) { alert("Network error. Please check your internet."); }
+            alert("Success! Sent to Sheets."); 
+        } catch(e) { alert("Error sending data."); }
     }
+
+    function openSettings() { document.getElementById('settingsModal').style.display = 'block'; document.getElementById('sheetUrl').value = localStorage.getItem('phil_iri_url'); }
+    function closeSettings() { document.getElementById('settingsModal').style.display = 'none'; }
+    function saveConfig() { localStorage.setItem('phil_iri_url', document.getElementById('sheetUrl').value); alert("Saved!"); closeSettings(); }
 </script>
 </body>
 </html>
